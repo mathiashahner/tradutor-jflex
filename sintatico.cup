@@ -1,0 +1,40 @@
+import java_cup.runtime.*;
+
+parser code  {:
+  public void report_error(String message, Object info) {
+    StringBuilder m = new StringBuilder("Error ");
+
+    if (info instanceof java_cup.runtime.Symbol)
+      m.append("(" + info.toString() + ")");
+
+    m.append(" : " + message);
+    System.out.println(m);
+  }
+
+  public void report_fatal_error(String message, Object info) {
+    report_error(message, info);
+    throw new RuntimeException("Erro fatal de sintáxe");
+  }
+:};
+
+terminal CHAR, INT, FLOAT;
+terminal IDENTIFICADOR, INTEIRO, FLUTUANTE;
+terminal VIRGULA, COLCHETE_ESQ, COLCHETE_DIR, PONTO_VIRGULA;
+
+non terminal expressoes, expressao, expr;
+non terminal tipo, declaracoes, declaracao;
+
+expressoes       ::= expressoes expressao |
+                     expressao;
+
+expressao        ::= expr PONTO_VIRGULA;
+
+expr             ::= tipo declaracoes;
+
+tipo             ::= CHAR | INT | FLOAT;
+
+declaracoes      ::= declaracao |
+                     declaracoes VIRGULA declaracao;
+
+declaracao       ::= IDENTIFICADOR |
+                     IDENTIFICADOR COLCHETE_ESQ INTEIRO COLCHETE_DIR;
