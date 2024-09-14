@@ -1,0 +1,5 @@
+*.class
+
+lexico.java
+parser.java
+sym.java
