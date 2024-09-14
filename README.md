@@ -1,11 +1,11 @@
-# Atividade Vivencial 1
+# Tradutor com JFlex e JCup
 
 | Arquivo | Descrição |
 | --- | --- |
 | lexico.flex | Define o analisador léxico |
 | sintatico.cup | Define o analisador sintático |
 | Main.java | Instancia as classes necessárias e inicia a execução dos analisadores |
-| main.c | Expressões para testar os analisadores |
+| teste.c | Expressões para testar os analisadores |
 | script.sh | Automação para executar a compilação e execução |
 
 ### Ferramentas

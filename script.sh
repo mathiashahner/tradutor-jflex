@@ -13,4 +13,4 @@ java -jar $JAVA_CUP_JAR sintatico.cup
 
 # Compila e executa o programa
 javac -cp $LOCAL_PATH:$JAVA_CUP_JAR Main.java
-java -cp $LOCAL_PATH:$JAVA_CUP_RUNTIME_JAR Main main.c
+java -cp $LOCAL_PATH:$JAVA_CUP_RUNTIME_JAR Main teste.c
