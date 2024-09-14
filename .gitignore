@@ -1,5 +1,6 @@
 *.class
 
 lexico.java
+lexico.java~
 parser.java
 sym.java

@@ -21,15 +21,13 @@ terminal CHAR, INT, FLOAT;
 terminal IDENTIFICADOR, INTEIRO, FLUTUANTE;
 terminal VIRGULA, COLCHETE_ESQ, COLCHETE_DIR, PONTO_VIRGULA;
 
-non terminal expressoes, expressao, expr;
+non terminal expressoes, expressao;
 non terminal tipo, declaracoes, declaracao;
 
 expressoes       ::= expressoes expressao |
                      expressao;
 
-expressao        ::= expr PONTO_VIRGULA;
-
-expr             ::= tipo declaracoes;
+expressao        ::= tipo declaracoes PONTO_VIRGULA;
 
 tipo             ::= CHAR | INT | FLOAT;
 

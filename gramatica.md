@@ -10,14 +10,15 @@ Não foram encontradas restrições referentes aos intervalos de valores permiti
 G = (V, T, P, S)
 
 V = {
-  EXPRESSOES, EXPRESSAO, EXPR, TIPO, DECLARACOES, DECLARACAO,
+  EXPRESSOES, EXPRESSAO, TIPO, DECLARACOES, DECLARACAO,
   IDENTIFICADOR, IDENTS, IDENT_INI, IDENT_FIM, FLUTUANTE,
   INTEIRO, DIGITOS, DIGITO, DIGITO_SEM_ZERO, LETRA
 }
 
 T = {
   char, int, float, if, else, while,
-  =, <, >, !, +, -, *, /, ., ,, [, ], ;, _,
+  _, =, !, <, >, +, -, *, /,
+  ., ,, ;, {, }, (, ), [, ],
   a, b, c, d, e, f, g, h, i, j, k, l, m,
   n, o, p, q, r, s, t, u, v, w, x, y, z,
   A, B, C, D, E, F, G, H, I, J, K, L, M,
@@ -29,8 +30,7 @@ S = EXPRESSOES
 
 P = {
   EXPRESSOES → EXPRESSOES EXPRESSAO | EXPRESSAO
-  EXPRESSAO → EXPR ;
-  EXPR → TIPO DECLARACOES
+  EXPRESSAO → TIPO DECLARACOES ;
   TIPO → char | int | float
   DECLARACOES → DECLARACAO | DECLARACOES , DECLARACAO
   DECLARACAO → IDENTIFICADOR | IDENTIFICADOR [ INTEIRO ]

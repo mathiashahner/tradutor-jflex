@@ -2,6 +2,7 @@
 
 | Arquivo | Descrição |
 | --- | --- |
+| gramatica.md | Define a gramática implementada pelos analisadores |
 | lexico.flex | Define o analisador léxico |
 | sintatico.cup | Define o analisador sintático |
 | Main.java | Instancia as classes necessárias e inicia a execução dos analisadores |
