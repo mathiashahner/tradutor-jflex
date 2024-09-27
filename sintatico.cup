@@ -1,33 +1,43 @@
 import java_cup.runtime.*;
 
-parser code  {:
-  public void report_error(String message, Object info) {
-    StringBuilder m = new StringBuilder("Error ");
+parser code {:
+  public void reportar_erro(String mensagem, Object info) {
+    StringBuilder m = new StringBuilder("Erro ");
 
     if (info instanceof java_cup.runtime.Symbol)
       m.append("(" + info.toString() + ")");
 
-    m.append(" : " + message);
+    m.append(" : " + mensagem);
     System.out.println(m);
   }
 
-  public void report_fatal_error(String message, Object info) {
-    report_error(message, info);
+  public void reportar_erro_fatal(String mensagem, Object info) {
+    reportar_erro(mensagem, info);
     throw new RuntimeException("Erro fatal de sintáxe");
   }
 :};
 
 terminal CHAR, INT, FLOAT;
+terminal IF, ELSE, WHILE;
 terminal IDENTIFICADOR, INTEIRO, FLUTUANTE;
-terminal VIRGULA, COLCHETE_ESQ, COLCHETE_DIR, PONTO_VIRGULA;
+terminal VIRGULA, PONTO_VIRGULA, COLCHETE_ESQ, COLCHETE_DIR;
+terminal PARENTESE_ESQ, PARENTESE_DIR, CHAVE_ESQ, CHAVE_DIR;
+terminal ADICAO, SUBTRACAO, MULTIPLICACAO, DIVISAO;
+terminal IGUAL, ADICAO_IGUAL, SUBTRACAO_IGUAL, MULTIPLICACAO_IGUAL, DIVISAO_IGUAL;
+terminal IGUAL_IGUAL, DIFERENTE, MENOR_IGUAL, MAIOR_IGUAL, MENOR, MAIOR;
 
 non terminal expressoes, expressao;
 non terminal tipo, declaracoes, declaracao;
+non terminal if, while, condicao, argumento;
+non terminal bloco_comandos, comandos, comando;
+non terminal oper_matematico, oper_atribuicao, oper_relacional;
 
 expressoes       ::= expressoes expressao |
                      expressao;
 
-expressao        ::= tipo declaracoes PONTO_VIRGULA;
+expressao        ::= tipo declaracoes PONTO_VIRGULA |
+                     while |
+                     if;
 
 tipo             ::= CHAR | INT | FLOAT;
 
@@ -36,3 +46,26 @@ declaracoes      ::= declaracao |
 
 declaracao       ::= IDENTIFICADOR |
                      IDENTIFICADOR COLCHETE_ESQ INTEIRO COLCHETE_DIR;
+
+if               ::= IF condicao bloco_comandos |
+                     IF condicao bloco_comandos ELSE bloco_comandos;
+
+while            ::= WHILE condicao bloco_comandos;
+
+condicao         ::= PARENTESE_ESQ argumento oper_relacional argumento PARENTESE_DIR;
+
+bloco_comandos   ::= CHAVE_ESQ comandos CHAVE_DIR;
+
+comandos         ::= comandos comando |
+                     comando;
+
+comando          ::= IDENTIFICADOR oper_atribuicao argumento PONTO_VIRGULA |
+                     IDENTIFICADOR oper_atribuicao argumento oper_matematico argumento PONTO_VIRGULA;
+
+argumento        ::= IDENTIFICADOR | FLUTUANTE | INTEIRO;
+
+oper_matematico  ::= ADICAO | SUBTRACAO | MULTIPLICACAO | DIVISAO;
+
+oper_atribuicao  ::= IGUAL | ADICAO_IGUAL | SUBTRACAO_IGUAL | MULTIPLICACAO_IGUAL | DIVISAO_IGUAL;
+
+oper_relacional  ::= IGUAL_IGUAL | DIFERENTE | MENOR_IGUAL | MAIOR_IGUAL | MENOR | MAIOR;

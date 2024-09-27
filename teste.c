@@ -9,3 +9,9 @@ float arara, b, c33_;
 
 char a_1_2_3, abc123;
 char _array[10], _array2[20];
+
+if (a == b)
+{
+  a = b;
+  a = b + 1;
+}
