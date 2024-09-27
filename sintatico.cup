@@ -29,15 +29,15 @@ terminal IGUAL_IGUAL, DIFERENTE, MENOR_IGUAL, MAIOR_IGUAL, MENOR, MAIOR;
 non terminal expressoes, expressao;
 non terminal tipo, declaracoes, declaracao;
 non terminal if, while, condicao, argumento;
-non terminal bloco_comandos, comandos, comando;
+non terminal bloco_comandos, comandos, comando, operacao;
 non terminal oper_matematico, oper_atribuicao, oper_relacional;
 
-expressoes       ::= expressoes expressao |
-                     expressao;
+expressoes       ::= expressao |
+                     expressoes expressao;
 
-expressao        ::= tipo declaracoes PONTO_VIRGULA |
+expressao        ::= if |
                      while |
-                     if;
+                     tipo declaracoes PONTO_VIRGULA;
 
 tipo             ::= CHAR | INT | FLOAT;
 
@@ -59,8 +59,10 @@ bloco_comandos   ::= CHAVE_ESQ comandos CHAVE_DIR;
 comandos         ::= comandos comando |
                      comando;
 
-comando          ::= IDENTIFICADOR oper_atribuicao argumento PONTO_VIRGULA |
-                     IDENTIFICADOR oper_atribuicao argumento oper_matematico argumento PONTO_VIRGULA;
+comando          ::= IDENTIFICADOR oper_atribuicao operacao PONTO_VIRGULA;
+
+operacao         ::= argumento |
+                     argumento oper_matematico argumento;
 
 argumento        ::= IDENTIFICADOR | FLUTUANTE | INTEIRO;
 
