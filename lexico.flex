@@ -5,6 +5,7 @@ import java_cup.runtime.*;
 %class lexico
 
 %cup
+%cupdebug
 
 %line
 %column
@@ -73,4 +74,4 @@ ESPACO_BRANCO   = {QUEBRA_LINHA} | [ \t\f]
 
 {ESPACO_BRANCO} { /* Não faça nada */ }
 
-[^]             { throw new Error("Caracter inválido <" + yytext() + ">"); }
+[^]             { throw new Error("Caracter inválido \"" + yytext() + "\", linha " + yyline + ", coluna " + yycolumn); }

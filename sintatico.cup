@@ -1,7 +1,7 @@
 import java_cup.runtime.*;
 
 parser code {:
-  public void reportar_erro(String mensagem, Object info) {
+  public void report_error(String mensagem, Object info) {
     StringBuilder m = new StringBuilder("Erro ");
 
     if (info instanceof java_cup.runtime.Symbol)
@@ -11,8 +11,8 @@ parser code {:
     System.out.println(m);
   }
 
-  public void reportar_erro_fatal(String mensagem, Object info) {
-    reportar_erro(mensagem, info);
+  public void report_fatal_error(String mensagem, Object info) {
+    report_error(mensagem, info);
     throw new RuntimeException("Erro fatal de sintáxe");
   }
 :};
